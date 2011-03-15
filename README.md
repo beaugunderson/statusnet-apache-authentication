@@ -8,7 +8,7 @@ depends on the LdapCommon plugin.
 
 Please note that this plugin has not been tested for security vulnerabilities and should be
 considered alpha quality at best (though it's being used in my office of 60 or so people without
-issue). *Please set it up on a test instance first so that it does't affect your existing users.*
+issue). *Please set it up on a test instance first so that it doesn't affect your existing users.*
 
 It probably relies too heavily on your environment being like mine; if you get it to work please
 let me know what you had to change to do so and I'll incorporate those changes (or simply fork and
@@ -71,7 +71,7 @@ Settings
 
 Default values are in (parenthesis)
 
-See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php for additional information about these options.
+See the [PHP LDAP manual](http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php) for additional information about these options.
 
 For most LDAP installations, the "nickname" and "username" attributes should
 be the same.
@@ -80,7 +80,7 @@ Example
 -------
 
 Here's an example apache2 configuration snippet that specifies Kerberos authentication using
-Likewise Open:
+[Likewise Open](http://www.likewise.com/products/likewise_open/):
 
        <Directory /home/www/statusnet>
           # This uses mod_auth_kerb from Likewise

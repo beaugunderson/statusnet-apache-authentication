@@ -24,43 +24,45 @@ to the bottom of your config.php.
 Settings
 --------
 
-* provider_name*: This is a identifier designated to the connection.
-It's how StatusNet will refer to the authentication source.
-For the most part, any name can be used, so long as each authentication source has a different identifier.
-In most cases there will be only one authentication source used.
-* authoritative (false): Set to true if LDAP's responses are authoritative
-(if authorative and LDAP fails, no other password checking will be done).
-* autoregistration (false): Set to true if users should be automatically created
-when they attempt to login.
-* domain: The domain to append to a user's username to create their email address
-* email_changeable (true): Are users allowed to change their email address?
-(true or false)
-* password_changeable (true): Are users allowed to change their passwords?
-(true or false)
-* password_encoding: required if users are to be able to change their passwords
-Possible values are: crypt, ext_des, md5crypt, blowfish, md5, sha, ssha,
-smd5, ad, clear
-* host: required, LDAP server name to connect to. You can provide several hosts in an
-array in which case the hosts are tried from left to right.
-* port: Port on the server.
-* version: LDAP version.
-* starttls: TLS is started after connecting.
-* binddn: The distinguished name to bind as (username).
-* bindpw: Password for the binddn.
-* basedn: required, LDAP base name (root directory).
-* options
-* filter: Default search filter.
-* scope: Default search scope.
-* schema_cachefile: File location to store ldap schema.
-* schema_maxage: TTL for cache file.
-* attributes: an array that relates StatusNet user attributes to LDAP ones
-** username: required, LDAP attribute value entered when authenticating to StatusNet
-** nickname: required, LDAP attribute value shown as the user's nickname
-** email
-** fullname
-** homepage
-** location
-** password: required if users are to be able to change their passwords
+*   provider_name*: This is a identifier designated to the connection.
+
+    It's how StatusNet will refer to the authentication source.
+    For the most part, any name can be used, so long as each authentication source has a different identifier.
+    In most cases there will be only one authentication source used.
+*   authoritative (false): Set to true if LDAP's responses are authoritative
+    (if authorative and LDAP fails, no other password checking will be done).
+*   autoregistration (false): Set to true if users should be automatically created
+    when they attempt to login.
+*   domain: The domain to append to a user's username to create their email address
+*   email_changeable (true): Are users allowed to change their email address?
+    (true or false)
+*   password_changeable (true): Are users allowed to change their passwords?
+    (true or false)
+*   password_encoding: required if users are to be able to change their passwords
+    Possible values are: crypt, ext_des, md5crypt, blowfish, md5, sha, ssha,
+    smd5, ad, clear
+*   host: required, LDAP server name to connect to. You can provide several hosts in an
+    array in which case the hosts are tried from left to right.
+*   port: Port on the server.
+*   version: LDAP version.
+*   starttls: TLS is started after connecting.
+*   binddn: The distinguished name to bind as (username).
+*   bindpw: Password for the binddn.
+*   basedn: required, LDAP base name (root directory).
+*   options
+*   filter: Default search filter.
+*   scope: Default search scope.
+*   schema_cachefile: File location to store ldap schema.
+*   schema_maxage: TTL for cache file.
+*   attributes: an array that relates StatusNet user attributes to LDAP ones
+*   username: required, LDAP attribute value entered when authenticating to StatusNet
+
+    *   nickname: required, LDAP attribute value shown as the user's nickname
+    *   email
+    *   fullname
+    *   homepage
+    *   location
+    *   password: required if users are to be able to change their passwords
 
 Default values are in (parenthesis)
 

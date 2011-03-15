@@ -71,7 +71,7 @@ Settings
 
 Default values are in (parenthesis)
 
-See the [PHP LDAP manual](http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php) for additional information about these options.
+See the [Net_LDAP2 manual](http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php) for additional information about these options.
 
 For most LDAP installations, the "nickname" and "username" attributes should
 be the same.

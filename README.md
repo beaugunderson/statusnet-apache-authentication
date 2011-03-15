@@ -3,11 +3,16 @@ Apache Authentication
 
 The Apache Authentication plugin makes StatusNet let Apache handle authentication.
 
-It also retrieves user attributes from LDAP during auto-registration.
+It also retrieves user attributes from LDAP during auto-registration and because of this
+depends on the LdapCommon plugin.
 
 Please note that this plugin has not been tested for security vulnerabilities and should be
 considered alpha quality at best (though it's being used in my office of 60 or so people without
-issue).
+issue). *Please set it up on a test instance first so that it does't affect your existing users.*
+
+It probably relies too heavily on your environment being like mine; if you get it to work please
+let me know what you had to change to do so and I'll incorporate those changes (or simply fork and
+send me a pull request).
 
 Installation
 ------------
@@ -24,45 +29,45 @@ to the bottom of your config.php.
 Settings
 --------
 
-*   provider_name*: This is a identifier designated to the connection.
+*   **provider_name**: required, this is an identifier designated to the connection.
 
     It's how StatusNet will refer to the authentication source.
     For the most part, any name can be used, so long as each authentication source has a different identifier.
     In most cases there will be only one authentication source used.
-*   authoritative (false): Set to true if LDAP's responses are authoritative
+*   **authoritative** (false): Set to true if LDAP's responses are authoritative
     (if authorative and LDAP fails, no other password checking will be done).
-*   autoregistration (false): Set to true if users should be automatically created
+*   **autoregistration** (false): Set to true if users should be automatically created
     when they attempt to login.
-*   domain: The domain to append to a user's username to create their email address
-*   email_changeable (true): Are users allowed to change their email address?
+*   **domain**: The domain to append to a user's username to create their email address
+*   **email_changeable** (true): Are users allowed to change their email address?
     (true or false)
-*   password_changeable (true): Are users allowed to change their passwords?
+*   **password_changeable** (true): Are users allowed to change their passwords?
     (true or false)
-*   password_encoding: required if users are to be able to change their passwords
+*   **password_encoding**: required if users are to be able to change their passwords
     Possible values are: crypt, ext_des, md5crypt, blowfish, md5, sha, ssha,
     smd5, ad, clear
-*   host: required, LDAP server name to connect to. You can provide several hosts in an
+*   **host**: required, LDAP server name to connect to. You can provide several hosts in an
     array in which case the hosts are tried from left to right.
-*   port: Port on the server.
-*   version: LDAP version.
-*   starttls: TLS is started after connecting.
-*   binddn: The distinguished name to bind as (username).
-*   bindpw: Password for the binddn.
-*   basedn: required, LDAP base name (root directory).
-*   options
-*   filter: Default search filter.
-*   scope: Default search scope.
-*   schema_cachefile: File location to store ldap schema.
-*   schema_maxage: TTL for cache file.
-*   attributes: an array that relates StatusNet user attributes to LDAP ones
-*   username: required, LDAP attribute value entered when authenticating to StatusNet
+*   **port**: Port on the server.
+*   **version**: LDAP version.
+*   **starttls**: TLS is started after connecting.
+*   **binddn**: The distinguished name to bind as (username).
+*   **bindpw**: Password for the binddn.
+*   **basedn**: required, LDAP base name (root directory).
+*   **options**
+*   **filter**: Default search filter.
+*   **scope**: Default search scope.
+*   **schema_cachefile**: File location to store ldap schema.
+*   **schema_maxage**: TTL for cache file.
+*   **attributes**: an array that relates StatusNet user attributes to LDAP ones
 
-    *   nickname: required, LDAP attribute value shown as the user's nickname
-    *   email
-    *   fullname
-    *   homepage
-    *   location
-    *   password: required if users are to be able to change their passwords
+    *   **username**: required, LDAP attribute value entered when authenticating to StatusNet
+    *   **nickname**: required, LDAP attribute value shown as the user's nickname
+    *   **email**
+    *   **fullname**
+    *   **homepage**
+    *   **location**
+    *   **password**: required if users are to be able to change their passwords
 
 Default values are in (parenthesis)
 

@@ -14,67 +14,60 @@ Installation
 
 Copy these files to plugins/ApacheAuthentication within your StatusNet installation.
 
-add "addPlugin('apacheAuthentication',
-    array('setting'=>'value', 'setting2'=>'value2', ...);"
-to the bottom of your config.php
+Add a configuration stanza like
+
+    "addPlugin('apacheAuthentication',
+       array('setting'=>'value', 'setting2'=>'value2', ...);"
+
+to the bottom of your config.php.
 
 Settings
 --------
 
-provider_name*: This is a identifier designated to the connection.
-    It's how StatusNet will refer to the authentication source.
-    For the most part, any name can be used, so long as each authentication source has a different identifier.
-    In most cases there will be only one authentication source used.
-authoritative (false): Set to true if LDAP's responses are authoritative
-    (if authorative and LDAP fails, no other password checking will be done).
-autoregistration (false): Set to true if users should be automatically created
-    when they attempt to login.
-domain: The domain to append to a user's username to create their email address
-email_changeable (true): Are users allowed to change their email address?
-    (true or false)
-password_changeable (true): Are users allowed to change their passwords?
-    (true or false)
-password_encoding: required if users are to be able to change their passwords
-    Possible values are: crypt, ext_des, md5crypt, blowfish, md5, sha, ssha,
-        smd5, ad, clear
+* provider_name*: This is a identifier designated to the connection.
+It's how StatusNet will refer to the authentication source.
+For the most part, any name can be used, so long as each authentication source has a different identifier.
+In most cases there will be only one authentication source used.
+* authoritative (false): Set to true if LDAP's responses are authoritative
+(if authorative and LDAP fails, no other password checking will be done).
+* autoregistration (false): Set to true if users should be automatically created
+when they attempt to login.
+* domain: The domain to append to a user's username to create their email address
+* email_changeable (true): Are users allowed to change their email address?
+(true or false)
+* password_changeable (true): Are users allowed to change their passwords?
+(true or false)
+* password_encoding: required if users are to be able to change their passwords
+Possible values are: crypt, ext_des, md5crypt, blowfish, md5, sha, ssha,
+smd5, ad, clear
+* host: required, LDAP server name to connect to. You can provide several hosts in an
+array in which case the hosts are tried from left to right.
+* port: Port on the server.
+* version: LDAP version.
+* starttls: TLS is started after connecting.
+* binddn: The distinguished name to bind as (username).
+* bindpw: Password for the binddn.
+* basedn: required, LDAP base name (root directory).
+* options
+* filter: Default search filter.
+* scope: Default search scope.
+* schema_cachefile: File location to store ldap schema.
+* schema_maxage: TTL for cache file.
+* attributes: an array that relates StatusNet user attributes to LDAP ones
+** username: required, LDAP attribute value entered when authenticating to StatusNet
+** nickname: required, LDAP attribute value shown as the user's nickname
+** email
+** fullname
+** homepage
+** location
+** password: required if users are to be able to change their passwords
 
-host*: LDAP server name to connect to. You can provide several hosts in an
-    array in which case the hosts are tried from left to right.
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-port: Port on the server.
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-version: LDAP version.
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-starttls: TLS is started after connecting.
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-binddn: The distinguished name to bind as (username).
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-bindpw: Password for the binddn.
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-basedn*: LDAP base name (root directory).
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-options: See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-filter: Default search filter.
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-scope: Default search scope.
-    See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php
-schema_cachefile: File location to store ldap schema.
-schema_maxage: TTL for cache file.
+Default values are in (parenthesis)
 
-attributes: an array that relates StatusNet user attributes to LDAP ones
-    username*: LDAP attribute value entered when authenticating to StatusNet
-    nickname*: LDAP attribute value shown as the user's nickname
-    email
-    fullname
-    homepage
-    location
-    password: required if users are to be able to change their passwords
-
-* required
-default values are in (parenthesis)
+See http://pear.php.net/manual/en/package.networking.net-ldap2.connecting.php for additional information about these options.
 
 For most LDAP installations, the "nickname" and "username" attributes should
-    be the same.
+be the same.
 
 Example
 -------
@@ -82,38 +75,38 @@ Example
 Here's an example apache2 configuration snippet that specifies Kerberos authentication using
 Likewise Open:
 
-   <Directory /home/www/statusnet>
-      # This uses mod_auth_kerb from Likewise
-      AuthType Kerberos
-      AuthName "Kerberos Login"
+       <Directory /home/www/statusnet>
+          # This uses mod_auth_kerb from Likewise
+          AuthType Kerberos
+          AuthName "Kerberos Login"
 
-      KrbAuthRealms GLOBAL.LOC
-      KrbAuthoritative on
-      KrbMethodNegotiate on
-      KrbMethodK5Passwd on
-      KrbVerifyKDC off
-      Krb5Keytab /etc/apache2/status.ktb
+          KrbAuthRealms GLOBAL.LOC
+          KrbAuthoritative on
+          KrbMethodNegotiate on
+          KrbMethodK5Passwd on
+          KrbVerifyKDC off
+          Krb5Keytab /etc/apache2/status.ktb
 
-      Require valid-user
-   </Directory>
+          Require valid-user
+       </Directory>
 
 Here's an example of an Apache Authentication plugin configuration that connects to
-    Microsoft Active Directory.
+Microsoft Active Directory.
 
-addPlugin('apacheAuthentication', array(
-    'provider_name'=>'Example',
-    'authoritative'=>true,
-    'autoregistration'=>true,
-    'domain'=>'global.loc',
-    'binddn'=>'username',
-    'bindpw'=>'password',
-    'basedn'=>'OU=Users,OU=StatusNet,OU=US,DC=americas,DC=global,DC=loc',
-    'host'=>array('server1', 'server2'),
-    'password_encoding'=>'ad',
-    'attributes'=>array(
-        'username'=>'sAMAccountName',
-        'nickname'=>'sAMAccountName',
-        'email'=>'mail',
-        'fullname'=>'displayName',
-        'password'=>'unicodePwd')
-));
+    addPlugin('apacheAuthentication', array(
+        'provider_name'=>'Example',
+        'authoritative'=>true,
+        'autoregistration'=>true,
+        'domain'=>'global.loc',
+        'binddn'=>'username',
+        'bindpw'=>'password',
+        'basedn'=>'OU=Users,OU=StatusNet,OU=US,DC=americas,DC=global,DC=loc',
+        'host'=>array('server1', 'server2'),
+        'password_encoding'=>'ad',
+        'attributes'=>array(
+            'username'=>'sAMAccountName',
+            'nickname'=>'sAMAccountName',
+            'email'=>'mail',
+            'fullname'=>'displayName',
+            'password'=>'unicodePwd')
+    ));

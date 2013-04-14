@@ -117,3 +117,14 @@ Microsoft Active Directory.
             'fullname'=>'displayName',
             'password'=>'unicodePwd')
     ));
+
+## FAQ
+
+Q: I get the following (or similar) error
+
+    Fatal error: Class User_username contains 1 abstract method and must therefore be 
+    declared abstract or implement the remaining methods (Managed_DataObject::schemaDef)
+    in /path/to/User_username.php on line 63
+
+A: This has been [observed](http://status.net/open-source/issues/3299) previously and 
+a [patch](https://gitorious.org/statusnet/mainline/merge_requests/202) submitted.

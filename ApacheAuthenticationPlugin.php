@@ -30,7 +30,7 @@ class ApacheAuthenticationPlugin extends AuthenticationPlugin
       switch ($cls)
       {
       case 'ApacheLoginAction':
-         require_once(INSTALLDIR.'/plugins/ApacheAuthentication/ApacheLogin.php');
+         require_once(dirname(__FILE__).'/ApacheLogin.php');
 
          return false;
       case 'LdapCommon':
